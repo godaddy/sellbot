@@ -1,0 +1,7 @@
+{
+  "env": "ote",
+  "applicationId": "YOUR_APPLICATION_ID",
+
+  "collectBusinessId": "YOUR_COLLECT_BUSINESS_ID",
+  "collectTheme": "default"
+}
