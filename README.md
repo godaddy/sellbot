@@ -41,7 +41,11 @@ Prerequisites:
 1. A reseller organization on Poynt OTE and a cloud app registered against it.
 2. The keypair PEM file for that cloud app, saved as `keypair.pem` in the repo
    root.
-3. Update `lib/configs.json` with your `applicationId` and `collectBusinessId`.
+3. The Poynt public key (PEM) that signs the signup callback `code` JWT, saved
+   as `poynt-public.pem` in the repo root (or point `signupTokenPublicKeyFile`
+   in `lib/configs.json` elsewhere). `/link/callback` rejects every token until
+   this is configured. Optionally set `signupTokenIssuer` to pin the `iss` claim.
+4. Update `lib/configs.json` with your `applicationId` and `collectBusinessId`.
    Update the same `applicationId` and `businessId` in `public/wallet.js` if you
    want the wallet button to render.
 
