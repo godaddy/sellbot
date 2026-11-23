@@ -202,7 +202,7 @@ block scripts
         console.log('Nonce created!');
         console.log(event);
         if (event && event.data && event.data.nonce) {
-          document.getElementById('collect-nonce-nonce').innerHTML = event.data.nonce;
+          document.getElementById('collect-nonce-nonce').textContent = event.data.nonce;
           document.getElementById('collect-form').style.display = 'none';
           document.getElementById('collect-nonce').style.display = 'block';
           document.getElementById('collect-nonce-success').style.display = 'block';
@@ -222,7 +222,7 @@ block scripts
     document.getElementById('collect-tokenize').onclick = function () {
       var data = {
         businessId: '#{businessId}',
-        nonce: document.getElementById('collect-nonce-nonce').innerHTML
+        nonce: document.getElementById('collect-nonce-nonce').textContent
       };
       fetch('/collect/tokenize', {
         method: 'POST',
@@ -239,20 +239,20 @@ block scripts
           if (data && data.paymentToken) {
             token = data.paymentToken;
             customerUserId = data.customerUserId;
-            document.getElementById('collect-token-card-id').innerHTML = data.card.cardId;
-            document.getElementById('collect-token-card-type').innerHTML = data.card.type;
-            document.getElementById('collect-token-card-number').innerHTML = data.card.numberMasked;
-            document.getElementById('collect-token-card-expiration').innerHTML = data.card.expirationMonth + '/' + data.card.expirationYear;
-            document.getElementById('collect-token-customer-id').innerHTML = data.customerUserId
-            document.getElementById('collect-token-payment-token').innerHTML = data.paymentToken;
-            document.getElementById('collect-token-token-id').innerHTML = data.token;
+            document.getElementById('collect-token-card-id').textContent = data.card.cardId;
+            document.getElementById('collect-token-card-type').textContent = data.card.type;
+            document.getElementById('collect-token-card-number').textContent = data.card.numberMasked;
+            document.getElementById('collect-token-card-expiration').textContent = data.card.expirationMonth + '/' + data.card.expirationYear;
+            document.getElementById('collect-token-customer-id').textContent = data.customerUserId
+            document.getElementById('collect-token-payment-token').textContent = data.paymentToken;
+            document.getElementById('collect-token-token-id').textContent = data.token;
             document.getElementById('collect-nonce').style.display = 'none';
             document.getElementById('collect-token').style.display = 'block';
             document.getElementById('collect-token-success').style.display = 'block';
             document.getElementById('collect-token-failed').style.display = 'none';
           } else {
             if (data.statusCode == 403) {
-              document.getElementById('collect-token-failed').innerHTML = data.developerMessage;
+              document.getElementById('collect-token-failed').textContent = data.developerMessage;
             }
             document.getElementById('collect-nonce').style.display = 'none';
             document.getElementById('collect-token').style.display = 'block';
@@ -289,20 +289,20 @@ block scripts
         .then(function (data) {
           if (!data || data.name === 'RequestError') {
             document.getElementById('collect-transaction-failure').style.display = 'flex';
-            document.getElementById('collect-transaction-failure-text').innerHTML = data ? (data.developerMessage || data.name) : 'Request failed. Please try again.';
+            document.getElementById('collect-transaction-failure-text').textContent = data ? (data.developerMessage || data.name) : 'Request failed. Please try again.';
           } else if (data.status === 'DECLINED') {
             document.getElementById('collect-transaction-failure').style.display = 'flex';
-            document.getElementById('collect-transaction-failure-text').innerHTML = [
+            document.getElementById('collect-transaction-failure-text').textContent = [
               'Transaction was declined',
               data.processorResponse && data.processorResponse.statusMessage
             ].filter(function (v) { return v; }).join(': ');
           } else {
             document.getElementById('collect-transaction-form').style.display = 'none';
             document.getElementById('collect-transaction-success').style.display = 'block';
-            document.getElementById('collect-transaction-id').innerHTML = data.id;
-            document.getElementById('collect-transaction-amount').innerHTML = '$' + (data.amounts.transactionAmount / 100).toFixed(2);
-            document.getElementById('collect-transaction-action').innerHTML = data.action;
-            document.getElementById('collect-transaction-status').innerHTML = data.status;
+            document.getElementById('collect-transaction-id').textContent = data.id;
+            document.getElementById('collect-transaction-amount').textContent = '$' + (data.amounts.transactionAmount / 100).toFixed(2);
+            document.getElementById('collect-transaction-action').textContent = data.action;
+            document.getElementById('collect-transaction-status').textContent = data.status;
           }
         });
     };
@@ -319,7 +319,7 @@ block scripts
         businessId: '#{businessId}',
         customerUserId: customerUserId,
         emailAddress: document.getElementById('collect-email').value,
-        nonce: document.getElementById('collect-nonce-nonce').innerHTML,
+        nonce: document.getElementById('collect-nonce-nonce').textContent,
       };
       fetch('/collect/charge', {
         method: 'POST',
@@ -334,20 +334,20 @@ block scripts
         .then(function (data) {
           if (!data || data.name === 'RequestError') {
             document.getElementById('collect-nonce-charge-failure').style.display = 'flex';
-            document.getElementById('collect-nonce-charge-failure-text').innerHTML = data ? (data.developerMessage || data.name) : 'Charge nonce failed. Please try again.';
+            document.getElementById('collect-nonce-charge-failure-text').textContent = data ? (data.developerMessage || data.name) : 'Charge nonce failed. Please try again.';
           } else if (data.status === 'DECLINED') {
             document.getElementById('collect-nonce-charge-failure').style.display = 'flex';
-            document.getElementById('collect-nonce-charge-failure-text').innerHTML = [
+            document.getElementById('collect-nonce-charge-failure-text').textContent = [
               'Transaction was declined',
               data.processorResponse && data.processorResponse.statusMessage
             ].filter(function (v) { return v; }).join(': ');
           } else {
             document.getElementById('collect-nonce-tokenize-form').style.display = 'none';
             document.getElementById('nonce-transaction-success').style.display = 'block';
-            document.getElementById('nonce-transaction-id').innerHTML = data.id;
-            document.getElementById('nonce-transaction-amount').innerHTML = '$' + (data.amounts.transactionAmount / 100).toFixed(2);
-            document.getElementById('nonce-transaction-action').innerHTML = data.action;
-            document.getElementById('nonce-transaction-status').innerHTML = data.status;
+            document.getElementById('nonce-transaction-id').textContent = data.id;
+            document.getElementById('nonce-transaction-amount').textContent = '$' + (data.amounts.transactionAmount / 100).toFixed(2);
+            document.getElementById('nonce-transaction-action').textContent = data.action;
+            document.getElementById('nonce-transaction-status').textContent = data.status;
           }
         });
     };

@@ -51,7 +51,7 @@ walletCollect.onload = function () {
   collect.on('payment_authorized', function (event) {
     if (event.nonce) {
       console.log('Nonce created for ' + event.source, event.nonce);
-      document.getElementById('collect-nonce-nonce').innerHTML = event.nonce;
+      document.getElementById('collect-nonce-nonce').textContent = event.nonce;
       document.getElementById('collect-form').style.display = 'none';
       document.getElementById('nonce-transaction-success').style.display = 'none';
       document.getElementById('collect-nonce').style.display = 'block';
