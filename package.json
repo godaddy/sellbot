@@ -29,7 +29,7 @@
   "homepage": "https://github.com/godaddy/sellbot#readme",
   "dependencies": {
     "body-parser": "^1.20.9",
-    "express": "^4.17.1",
+    "express": "^4.22.3",
     "jsonwebtoken": "^9.0.0",
     "poynt": "^1.0.1",
     "pug": "^3.0.0",
